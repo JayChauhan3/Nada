@@ -1,6 +1,5 @@
 {
-  "cleanUrls": true,
   "rewrites": [
-    { "source": "/album/:album*/:track", "destination": "/index.html" }
+    { "source": "/", "destination": "/index.html" }
   ]
 }
