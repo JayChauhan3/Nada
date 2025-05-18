@@ -4,13 +4,13 @@
       "id": "Jani",
       "title": "Jani",
       "description": "by spotify Hits",
-      "cover": "/images/jani-cover.jpg",
+      "cover": "/Songs/Jani/cover.jpg",
       "songs": [
         {
           "name": "No One Like Us.mp3",
           "title": "No One Like Us",
           "artist": "Jani",
-          "cover": "/images/jani-cover.jpg"
+          "cover": "/Songs/Jani/cover.jpg"
         }
       ]
     }
