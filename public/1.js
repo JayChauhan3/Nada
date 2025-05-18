@@ -50,9 +50,11 @@ async function getSongs(folder) {
   currentSongIndex = 0;
   currFolder = folder;
   try {
+    // Fetch the songs.json file
     const response = await fetch('songs.json');
     const data = await response.json();
     
+    // Find the playlist
     const playlist = data.playlists.find(p => p.id === folder);
     if (!playlist) {
       console.error("Playlist not found");
@@ -61,6 +63,7 @@ async function getSongs(folder) {
 
     songs = playlist.songs.map(song => song.name);
     
+    // Render song list
     let songul = document.querySelector('.library').getElementsByTagName("ul")[0];
     songul.innerHTML = "";
     
@@ -70,54 +73,20 @@ async function getSongs(folder) {
       li.setAttribute('data-src', song);
       li.className = 'song-item';
 
-      // Default values from songs.json
-      let coverUrl = songData.cover;
-      let artistName = songData.artist;
-      let songTitle = songData.title;
-
-      // Try to read tags from the MP3 file
-      const songUrl = `${window.location.origin}/Songs/${folder}/${encodeURIComponent(song)}`;
-      fetch(songUrl)
-        .then(res => res.blob())
-        .then(blob => {
-          jsmediatags.read(blob, {
-            onSuccess: function (tag) {
-              if (tag.tags.artist) artistName = tag.tags.artist;
-              if (tag.tags.title) songTitle = tag.tags.title;
-              if (tag.tags.picture) {
-                let base64String = "";
-                for (let i = 0; i < tag.tags.picture.data.length; i++) {
-                  base64String += String.fromCharCode(tag.tags.picture.data[i]);
-                }
-                coverUrl = `data:${tag.tags.picture.format};base64,${btoa(base64String)}`;
-              }
-              // Update UI with tag info
-              li.querySelector('.li-poster').src = coverUrl;
-              li.querySelector('.artist').textContent = artistName;
-              li.querySelector('.stitle').textContent = songTitle;
-            },
-            onError: function () {
-              // Use fallback from songs.json
-              li.querySelector('.li-poster').src = coverUrl;
-              li.querySelector('.artist').textContent = artistName;
-              li.querySelector('.stitle').textContent = songTitle;
-            }
-          });
-        });
-
       li.innerHTML = `
        <div class="s1">
-         <img class="li-poster" src="${coverUrl}" alt="${songTitle}">
+         <img class="li-poster" src="${songData.cover}" alt="${songData.title}">
          <button><img class="Click-play" src="../images/p.svg" alt="Play"></button>
        </div>
        <span>
-         <p class="stitle">${songTitle}</p>
-         <p class="artist">${artistName}</p>
+         <p class="stitle">${songData.title}</p>
+         <p class="artist">${songData.artist}</p>
        </span>
      `;
 
       songul.appendChild(li);
 
+      // Add click event listener
       li.addEventListener("click", () => {
         if (currentlyPlayingLi) {
           currentlyPlayingLi.classList.remove('now-playing');
@@ -137,12 +106,13 @@ async function getSongs(folder) {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Play music (updated to handle state and UI)
+// Play music
 const playMusic = (track, pause = false, fromList = false, resumeTime = 0, autoPlay = true) => {
   try {
     play.src = '../images/loading.svg';
     
-    const songUrl = `${window.location.origin}/Songs/${currFolder}/${encodeURIComponent(track)}`;
+    // Use relative path for your songs
+    const songUrl = `/Songs/${currFolder}/${encodeURIComponent(track)}`;
     
     if (!currentSong.paused) {
       currentSong.pause();
@@ -152,44 +122,15 @@ const playMusic = (track, pause = false, fromList = false, resumeTime = 0, autoP
     isSongLoaded = false;
     currentSongIndex = songs.findIndex(s => s === track);
 
-    // Fallback values from songs.json
+    // Get song data from songs.json
     fetch('songs.json')
       .then(response => response.json())
       .then(data => {
         const playlist = data.playlists.find(p => p.id === currFolder);
         const songData = playlist.songs.find(s => s.name === track);
-        let coverUrl = songData.cover;
-        let artistName = songData.artist;
-        let songTitle = songData.title;
-
-        // Try to read tags from the MP3 file
-        fetch(songUrl)
-          .then(res => res.blob())
-          .then(blob => {
-            jsmediatags.read(blob, {
-              onSuccess: function (tag) {
-                if (tag.tags.artist) artistName = tag.tags.artist;
-                if (tag.tags.title) songTitle = tag.tags.title;
-                if (tag.tags.picture) {
-                  let base64String = "";
-                  for (let i = 0; i < tag.tags.picture.data.length; i++) {
-                    base64String += String.fromCharCode(tag.tags.picture.data[i]);
-                  }
-                  coverUrl = `data:${tag.tags.picture.format};base64,${btoa(base64String)}`;
-                }
-                // Update player UI with tag info
-                document.querySelector('.cover').src = coverUrl;
-                document.querySelector('.track-text').firstElementChild.innerHTML = songTitle;
-                document.querySelector('.track-text p').textContent = artistName;
-              },
-              onError: function () {
-                // Use fallback from songs.json
-                document.querySelector('.cover').src = coverUrl;
-                document.querySelector('.track-text').firstElementChild.innerHTML = songTitle;
-                document.querySelector('.track-text p').textContent = artistName;
-              }
-            });
-          });
+        document.querySelector('.track-text').firstElementChild.innerHTML = songData.title;
+        document.querySelector('.track-text p').textContent = songData.artist;
+        document.querySelector('.cover').src = songData.cover;
       });
 
     localStorage.setItem('lastPlayedSong', track);
