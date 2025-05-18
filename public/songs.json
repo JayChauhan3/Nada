@@ -1,17 +1,88 @@
 {
   "playlists": [
     {
+      "id": "classic",
+      "title": "Classic",
+      "description": "Classic Indian Mix",
+      "cover": "/Songs/classic/cover.jpg",
+      "songs": [
+        { "name": "Buniyaad 2.0.mp3", "title": "Buniyaad 2.0", "artist": "Unknown", "cover": "/Songs/classic/cover.jpg" },
+        { "name": "indian-jasmine.mp3", "title": "Indian Jasmine", "artist": "Unknown", "cover": "/Songs/classic/cover.jpg" },
+        { "name": "indian-oriental-tune.mp3", "title": "Indian Oriental Tune", "artist": "Unknown", "cover": "/Songs/classic/cover.jpg" },
+        { "name": "indian-trap.mp3", "title": "Indian Trap", "artist": "Unknown", "cover": "/Songs/classic/cover.jpg" },
+        { "name": "phonk-brazilian.mp3", "title": "Phonk Brazilian", "artist": "Unknown", "cover": "/Songs/classic/cover.jpg" },
+        { "name": "rhythms.mp3", "title": "Rhythms", "artist": "Unknown", "cover": "/Songs/classic/cover.jpg" }
+      ]
+    },
+    {
+      "id": "divine",
+      "title": "Divine",
+      "description": "Divine Playlist",
+      "cover": "/Songs/divine/cover.jpg",
+      "songs": [
+        { "name": "4.10 - Divine.mp3", "title": "4.10 - Divine", "artist": "Divine", "cover": "/Songs/divine/cover.jpg" }
+      ]
+    },
+    {
       "id": "Jani",
       "title": "Jani",
       "description": "by spotify Hits",
       "cover": "/Songs/Jani/cover.jpg",
       "songs": [
-        {
-          "name": "No One Like Us.mp3",
-          "title": "No One Like Us",
-          "artist": "Jani",
-          "cover": "/Songs/Jani/cover.jpg"
-        }
+        { "name": "No One Like Us.mp3", "title": "No One Like Us", "artist": "Jani", "cover": "/Songs/Jani/cover.jpg" },
+        { "name": "Feels Like Home.mp3", "title": "Feels Like Home", "artist": "Jani", "cover": "/Songs/Jani/cover.jpg" }
+      ]
+    },
+    {
+      "id": "liked",
+      "title": "Liked",
+      "description": "Your Liked Songs",
+      "cover": "/Songs/liked/cover.jpg",
+      "songs": [
+        { "name": "500lbs.mp3", "title": "500lbs", "artist": "Unknown", "cover": "/Songs/liked/cover.jpg" },
+        { "name": "Aroma .mp3", "title": "Aroma", "artist": "Unknown", "cover": "/Songs/liked/cover.jpg" },
+        { "name": "Buniyaad The Yellow Diary.mp3", "title": "Buniyaad The Yellow Diary", "artist": "Unknown", "cover": "/Songs/liked/cover.jpg" },
+        { "name": "Dusk-Till-Dawn.mp3", "title": "Dusk Till Dawn", "artist": "Unknown", "cover": "/Songs/liked/cover.jpg" },
+        { "name": "Fast Lane.mp3", "title": "Fast Lane", "artist": "Unknown", "cover": "/Songs/liked/cover.jpg" },
+        { "name": "I Love You, I'm Sorry.mp3", "title": "I Love You, I'm Sorry", "artist": "Unknown", "cover": "/Songs/liked/cover.jpg" },
+        { "name": "Laugh Now Cry Later.mp3", "title": "Laugh Now Cry Later", "artist": "Unknown", "cover": "/Songs/liked/cover.jpg" },
+        { "name": "Lean With Me.mp3", "title": "Lean With Me", "artist": "Unknown", "cover": "/Songs/liked/cover.jpg" },
+        { "name": "Look At Me.mp3", "title": "Look At Me", "artist": "Unknown", "cover": "/Songs/liked/cover.jpg" },
+        { "name": "Power.mp3", "title": "Power", "artist": "Unknown", "cover": "/Songs/liked/cover.jpg" },
+        { "name": "Timeless.mp3", "title": "Timeless", "artist": "Unknown", "cover": "/Songs/liked/cover.jpg" },
+        { "name": "Tuta Pull Wahan.mp3", "title": "Tuta Pull Wahan", "artist": "Unknown", "cover": "/Songs/liked/cover.jpg" },
+        { "name": "Walking On A Dream.mp3", "title": "Walking On A Dream", "artist": "Unknown", "cover": "/Songs/liked/cover.jpg" },
+        { "name": "welcome home son.mp3", "title": "welcome home son", "artist": "Unknown", "cover": "/Songs/liked/cover.jpg" }
+      ]
+    },
+    {
+      "id": "Mega Mix",
+      "title": "Mega Mix",
+      "description": "Mega Mix Playlist",
+      "cover": "/Songs/Mega Mix/cover.jpg",
+      "songs": [
+        { "name": "indian-trap.mp3", "title": "Indian Trap", "artist": "Unknown", "cover": "/Songs/Mega Mix/cover.jpg" },
+        { "name": "phonk-brazilian.mp3", "title": "Phonk Brazilian", "artist": "Unknown", "cover": "/Songs/Mega Mix/cover.jpg" }
+      ]
+    },
+    {
+      "id": "Sidhu Moosewala",
+      "title": "Sidhu Moosewala",
+      "description": "Sidhu Moosewala Playlist",
+      "cover": "/Songs/Sidhu Moosewala/cover.jpg",
+      "songs": [
+        { "name": "Celebrity Killer.mp3", "title": "Celebrity Killer", "artist": "Sidhu Moosewala", "cover": "/Songs/Sidhu Moosewala/cover.jpg" }
+      ]
+    },
+    {
+      "id": "Yo Yo",
+      "title": "Yo Yo",
+      "description": "Yo Yo Playlist",
+      "cover": "/Songs/Yo Yo/cover.jpg",
+      "songs": [
+        { "name": "Chal Mere Ghar.mp3", "title": "Chal Mere Ghar", "artist": "Yo Yo", "cover": "/Songs/Yo Yo/cover.jpg" },
+        { "name": "Desi Kalakaar.mp3", "title": "Desi Kalakaar", "artist": "Yo Yo", "cover": "/Songs/Yo Yo/cover.jpg" },
+        { "name": "One Thousand Miles.mp3", "title": "One Thousand Miles", "artist": "Yo Yo", "cover": "/Songs/Yo Yo/cover.jpg" }
       ]
     }
   ]
