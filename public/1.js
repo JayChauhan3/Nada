@@ -50,84 +50,51 @@ async function getSongs(folder) {
   currentSongIndex = 0;
   currFolder = folder;
   try {
-    let a = await fetch(`http://127.0.0.1:3000/video%2084/${currFolder}/`);
-    let response = await a.text();
-
-    let div = document.createElement('div');
-    div.innerHTML = response;
-    let as = div.getElementsByTagName('a');
-    songs = [];
-
-    for (let index = 0; index < as.length; index++) {
-      const element = as[index];
-      if (element.href.endsWith(".mp3")) {
-        songs.push(decodeURIComponent(element.href.split("/").pop()));
-      }
+    // Fetch the songs.json file
+    const response = await fetch('songs.json');
+    const data = await response.json();
+    
+    // Find the playlist
+    const playlist = data.playlists.find(p => p.id === folder);
+    if (!playlist) {
+      console.error("Playlist not found");
+      return [];
     }
 
-    // Render song list with metadata reading
+    songs = playlist.songs.map(song => song.name);
+    
+    // Render song list
     let songul = document.querySelector('.library').getElementsByTagName("ul")[0];
     songul.innerHTML = "";
     
     for (const song of songs) {
-      let name = decodeURIComponent(song.split("/").pop());
-      let trackName = name.replace(/\.mp3$/i, '');
-
+      const songData = playlist.songs.find(s => s.name === song);
       const li = document.createElement('li');
-      li.setAttribute('data-src', name);
-      li.className = 'song-item'; // Add a class for styling
+      li.setAttribute('data-src', song);
+      li.className = 'song-item';
 
       li.innerHTML = `
        <div class="s1">
-         <img class="li-poster" src="../images/likedsongs.png" alt="${trackName}">
+         <img class="li-poster" src="${songData.cover}" alt="${songData.title}">
          <button><img class="Click-play" src="../images/p.svg" alt="Play"></button>
        </div>
        <span>
-         <p class="stitle">${trackName}</p>
-         <p class="artist">Loading...</p>
+         <p class="stitle">${songData.title}</p>
+         <p class="artist">${songData.artist}</p>
        </span>
      `;
 
       songul.appendChild(li);
 
-      const songUrl = `http://127.0.0.1:3000/video%2084/${currFolder}/${encodeURIComponent(name)}`;
-      fetch(songUrl)
-        .then(res => res.blob())
-        .then(blob => {
-          jsmediatags.read(blob, {
-            onSuccess: function (tag) {
-              const artist = tag.tags.artist || 'Unknown Artist';
-              li.querySelector('.artist').textContent = artist;
-
-              const picture = tag.tags.picture;
-              if (picture) {
-                let base64String = "";
-                for (let i = 0; i < picture.data.length; i++) {
-                  base64String += String.fromCharCode(picture.data[i]);
-                }
-                const imageUri = `data:${picture.format};base64,${btoa(base64String)}`;
-                li.querySelector('.li-poster').src = imageUri;
-              }
-            },
-            onError: function () {
-              li.querySelector('.artist').textContent = 'Unknown Artist';
-            }
-          });
-        });
-
-      // Add click event listener with more robust handling
+      // Add click event listener
       li.addEventListener("click", () => {
-        const actualFile = li.getAttribute("data-src");
-        
-        // Update visual indication of playing song
         if (currentlyPlayingLi) {
           currentlyPlayingLi.classList.remove('now-playing');
         }
         li.classList.add('now-playing');
         currentlyPlayingLi = li;
         
-        // Play the clicked song with autoPlay forced to true
-        playMusic(actualFile, false, true, 0, true);
+        playMusic(song, false, true, 0, true);
       });
     }
     return songs;
@@ -142,12 +109,11 @@ async function getSongs(folder) {
 // Play music (updated to handle state and UI)
 const playMusic = (track, pause = false, fromList = false, resumeTime = 0, autoPlay = true) => {
   try {
-    // Show loading state
-    play.src = '../images/loading.svg'; // You might need to create this SVG
+    play.src = '../images/loading.svg';
     
-    const songUrl = `http://127.0.0.1:3000/video%2084/${currFolder}/` + encodeURIComponent(track);
+    // Use GitHub raw URL for songs
+    const songUrl = `https://raw.githubusercontent.com/JayChauhan3/spotify/main/public/Songs/${currFolder}/${encodeURIComponent(track)}`;
     
-    // Pause any current playing audio before changing source
     if (!currentSong.paused) {
       currentSong.pause();
     }
@@ -155,25 +121,27 @@ const playMusic = (track, pause = false, fromList = false, resumeTime = 0, autoP
     currentSong.src = songUrl;
     isSongLoaded = false;
 
-    // Find and update currentSongIndex
-    currentSongIndex = songs.findIndex(s => decodeURIComponent(s) === decodeURIComponent(track));
+    currentSongIndex = songs.findIndex(s => s === track);
 
-    // Update UI immediately
-    document.querySelector('.track-text').firstElementChild.innerHTML = track.replace(/\.mp3$/i, '');
-    
-    // Store state in localStorage
+    // Get song data from songs.json
+    fetch('songs.json')
+      .then(response => response.json())
+      .then(data => {
+        const playlist = data.playlists.find(p => p.id === currFolder);
+        const songData = playlist.songs.find(s => s.name === track);
+        
+        document.querySelector('.track-text').firstElementChild.innerHTML = songData.title;
+        document.querySelector('.track-text p').textContent = songData.artist;
+        document.querySelector('.cover').src = songData.cover;
+      });
+
     localStorage.setItem('lastPlayedSong', track);
     localStorage.setItem('lastPlayedFolder', currFolder);
     localStorage.setItem('lastPlayedIndex', currentSongIndex);
 
-    // Load metadata and album art
-    readTagsFromUrl(songUrl, '.cover', '.track-text p');
-
-    // Set up event for when metadata is loaded
     currentSong.onloadedmetadata = () => {
       isSongLoaded = true;
       
-      // Set time position
       if (fromList) {
         currentSong.currentTime = 0;
         localStorage.setItem('lastPlayedTime', 0);
@@ -182,14 +150,11 @@ const playMusic = (track, pause = false, fromList = false, resumeTime = 0, autoP
         localStorage.setItem('lastPlayedTime', resumeTime);
       }
       
-      // Update UI with time information
       document.querySelector('.current-time').innerHTML = secondstominute(currentSong.currentTime);
       document.querySelector('.total-time').innerHTML = secondstominute(currentSong.duration);
       updateProgressBar();
 
-      // Play the song if autoPlay is true and not paused
       if (autoPlay && !pause) {
-        // Using playAudio helper for more reliable playback
         playAudio();
       } else {
         play.src = '../images/pcontrol.svg';
@@ -197,14 +162,12 @@ const playMusic = (track, pause = false, fromList = false, resumeTime = 0, autoP
       }
     };
     
-    // Handle errors
     currentSong.onerror = (e) => {
       console.error("Error loading audio:", e);
       play.src = '../images/pcontrol.svg';
       alert("Could not load the audio file. Please try again.");
     };
     
-    // Start loading the audio
     currentSong.load();
     
   } catch (error) {
@@ -271,47 +234,37 @@ async function readTagsFromUrl(songUrl, coverSelector, artistSelector) {
 // Display Album cards
 async function displayAlbum() {
   try {
-    let a = await fetch(`http://127.0.0.1:3000/video%2084/songs/`);
-    let response = await a.text();
-    let div = document.createElement('div');
-    div.innerHTML = response;
-    let anchors = div.getElementsByTagName("a");
-    let cardscontent = document.querySelector(".cardscontent");
-    let array = Array.from(anchors);
+    // Fetch the songs.json file
+    const response = await fetch('songs.json');
+    const data = await response.json();
+    const cardscontent = document.querySelector(".cardscontent");
     
-    for (let index = 0; index < array.length; index++) {
-      const e = array[index];
-
-      if (e.href.includes("/songs/") &&
-        !e.href.endsWith("/songs/") &&
-        !e.href.includes(".DS_Store")) {
-        let folder = e.href.split('/').filter(part => part).pop();
-
-        //get metadata of folder
-        let a = await fetch(`http://127.0.0.1:3000/video%2084/songs/${folder}/info.json`);
-        let response = await a.json();
-
-        cardscontent.innerHTML = cardscontent.innerHTML + ` <div data-folder="${folder}" class="card">
-              <div class="img-wrapper"><img src="${e.href}cover.jpg" class="poster" width="100%">
-                <button class="play-button">
-                  <img src="../images/play.svg" alt="Play" width="24" height="24" />
-                </button>
-              </div>
-              <span>${response.title}</span>
-              <p>${response.description}</p>
-            </div>`;
-      }
-    }
+    // Clear existing content
+    cardscontent.innerHTML = '';
     
-    //load the playlist whenever card is clicked
+    // Display each playlist as a card
+    data.playlists.forEach(playlist => {
+      cardscontent.innerHTML += `
+        <div data-folder="${playlist.id}" class="card">
+          <div class="img-wrapper">
+            <img src="${playlist.cover || '../images/likedsongs.png'}" class="poster" width="100%">
+            <button class="play-button">
+              <img src="../images/play.svg" alt="Play" width="24" height="24" />
+            </button>
+          </div>
+          <span>${playlist.title}</span>
+          <p>${playlist.description}</p>
+        </div>`;
+    });
+    
+    // Load the playlist whenever card is clicked
     Array.from(document.querySelectorAll('.card')).forEach(e => {
       e.addEventListener('click', async item => {
-        const folder = `songs/${item.currentTarget.dataset.folder}`;
+        const folder = item.currentTarget.dataset.folder;
         songs = await getSongs(folder);
 
         if (songs.length > 0) {
-          // Play first song, ensure UI is updated
-          playMusic(songs[0], false, true, 0, true); // Now with autoPlay = true
+          playMusic(songs[0], false, true, 0, true);
         }
 
         localStorage.setItem('lastPlayedFolder', folder);
