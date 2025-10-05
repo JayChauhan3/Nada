@@ -108,7 +108,7 @@ async function getSongs(folder) {
       li.innerHTML = `
        <div class="s1">
          <img class="li-poster" src="${coverUrl}" alt="${songTitle}">
-         <button><img class="Click-play" src="../images/p.svg" alt="Play"></button>
+         <button><img class="Click-play" src="./images/p.svg" alt="Play"></button>
        </div>
        <span>
          <p class="stitle">${songTitle}</p>
@@ -140,9 +140,9 @@ async function getSongs(folder) {
 // Play music
 const playMusic = (track, pause = false, fromList = false, resumeTime = 0, autoPlay = true) => {
   try {
-    play.src = '../images/loading.svg';
+    if (play) play.src = './images/loading.svg';
     
-    const songUrl = `${window.location.origin}/Songs/${currFolder}/${encodeURIComponent(track)}`;
+    const songUrl = `./Songs/${currFolder}/${encodeURIComponent(track)}`;
     
     if (!currentSong.paused) {
       currentSong.pause();
@@ -178,15 +178,51 @@ const playMusic = (track, pause = false, fromList = false, resumeTime = 0, autoP
                   coverUrl = `data:${tag.tags.picture.format};base64,${btoa(base64String)}`;
                 }
                 // Update player UI with tag info
+                const titleElement = document.querySelector('.track-text').firstElementChild;
+                const artistElement = document.querySelector('.track-text p');
+                
+                titleElement.textContent = songTitle;
+                artistElement.textContent = artistName;
                 document.querySelector('.cover').src = coverUrl;
-                document.querySelector('.track-text').firstElementChild.innerHTML = songTitle;
-                document.querySelector('.track-text p').textContent = artistName;
+                
+                // Check and add marquee class if text overflows
+                setTimeout(() => {
+                  if (titleElement.scrollWidth > titleElement.clientWidth) {
+                    titleElement.classList.add('marquee');
+                  } else {
+                    titleElement.classList.remove('marquee');
+                  }
+                  
+                  if (artistElement.scrollWidth > artistElement.clientWidth) {
+                    artistElement.classList.add('marquee');
+                  } else {
+                    artistElement.classList.remove('marquee');
+                  }
+                }, 100);
               },
               onError: function () {
                 // Use fallback from songs.json
+                const titleElement = document.querySelector('.track-text').firstElementChild;
+                const artistElement = document.querySelector('.track-text p');
+                
+                titleElement.textContent = songTitle;
+                artistElement.textContent = artistName;
                 document.querySelector('.cover').src = coverUrl;
-                document.querySelector('.track-text').firstElementChild.innerHTML = songTitle;
-                document.querySelector('.track-text p').textContent = artistName;
+                
+                // Check and add marquee class if text overflows
+                setTimeout(() => {
+                  if (titleElement.scrollWidth > titleElement.clientWidth) {
+                    titleElement.classList.add('marquee');
+                  } else {
+                    titleElement.classList.remove('marquee');
+                  }
+                  
+                  if (artistElement.scrollWidth > artistElement.clientWidth) {
+                    artistElement.classList.add('marquee');
+                  } else {
+                    artistElement.classList.remove('marquee');
+                  }
+                }, 100);
               }
             });
           });
@@ -196,8 +232,44 @@ const playMusic = (track, pause = false, fromList = false, resumeTime = 0, autoP
     localStorage.setItem('lastPlayedFolder', currFolder);
     localStorage.setItem('lastPlayedIndex', currentSongIndex);
 
+    // Handle song end
+    currentSong.onended = () => {
+      if (currentSongIndex < songs.length - 1) {
+        // Play next song if not the last song
+        currentSongIndex++;
+        playMusic(songs[currentSongIndex], false, true);
+      } else {
+        // Last song ended, show play button and update progress bar to 100%
+        play.src = './images/p.svg';
+        play.classList.remove('playing');
+        
+        // Update progress bar to show full duration
+        const progress = document.querySelector('.progress');
+        if (progress) {
+          progress.style.width = '100%';
+        }
+        
+        // Update current time to show full duration
+        document.querySelector('.current-time').textContent = document.querySelector('.total-time').textContent;
+        
+        // Keep the now-playing class on the last played song
+        // This will maintain the green highlight
+      }
+    };
+
     currentSong.onloadedmetadata = () => {
       isSongLoaded = true;
+      
+      // Update the now-playing class on the library items
+      const songItems = document.querySelectorAll('.library li');
+      songItems.forEach((item, index) => {
+        if (index === currentSongIndex) {
+          item.classList.add('now-playing');
+          currentlyPlayingLi = item;
+        } else {
+          item.classList.remove('now-playing');
+        }
+      });
       
       if (fromList) {
         currentSong.currentTime = 0;
@@ -214,7 +286,7 @@ const playMusic = (track, pause = false, fromList = false, resumeTime = 0, autoP
       if (autoPlay && !pause) {
         playAudio();
       } else {
-        play.src = '../images/pcontrol.svg';
+        if (play) play.src = './images/pcontrol.svg';
         localStorage.setItem('wasPlaying', 'false');
       }
     };
@@ -241,7 +313,7 @@ function playAudio() {
   if (playPromise !== undefined) {
     playPromise.then(() => {
       // Playback started successfully
-      play.src = '../images/pause.svg';
+      if (play) play.src = './images/pause.svg';
       localStorage.setItem('wasPlaying', 'true');
     }).catch(err => {
       console.error("Playback failed:", err);
@@ -273,7 +345,7 @@ async function readTagsFromUrl(songUrl, coverSelector, artistSelector) {
           const imageUri = `data:${picture.format};base64,${btoa(base64String)}`;
           if (coverSelector) document.querySelector(coverSelector).src = imageUri;
         } else {
-          if (coverSelector) document.querySelector(coverSelector).src = "../images/likedsongs.png";
+          if (coverSelector) document.querySelector(coverSelector).src = "./images/likedsongs.png";
         }
       },
       onError: function () {
@@ -304,9 +376,9 @@ async function displayAlbum() {
       cardscontent.innerHTML += `
         <div data-folder="${playlist.id}" class="card">
           <div class="img-wrapper">
-            <img src="${playlist.cover || '../images/likedsongs.png'}" class="poster" width="100%">
+            <img src="${playlist.cover || './images/likedsongs.png'}" class="poster" width="100%">
             <button class="play-button">
-              <img src="../images/play.svg" alt="Play" width="24" height="24" />
+              <img src="./images/play.svg" alt="Play" width="24" height="24" />
             </button>
           </div>
           <span>${playlist.title}</span>
@@ -347,11 +419,11 @@ function updateVolumeUI(volume) {
   volumeInput.style.background = `linear-gradient(to right, #1db954 ${percent}%, #535353 ${percent}%)`;
 
   if (volume === 0) {
-    volumeIcon.src = '../images/muted.svg';
+    volumeIcon.src = './images/muted.svg';
   } else if (volume < 0.5) {
-    volumeIcon.src = '../images/low.svg';
+    volumeIcon.src = './images/low.svg';
   } else {
-    volumeIcon.src = '../images/volume.svg';
+    volumeIcon.src = './images/volume.svg';
   }
 }
 
@@ -444,7 +516,7 @@ async function main() {
         playAudio(); // Use the more reliable play method
       } else {
         currentSong.pause();
-        play.src = '../images/pcontrol.svg';
+        if (play) play.src = './images/pcontrol.svg';
         localStorage.setItem('wasPlaying', 'false');
       }
     });

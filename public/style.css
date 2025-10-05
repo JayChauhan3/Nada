@@ -639,8 +639,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  padding: 10px 16px;
+  padding: 8px 16px;
   background-color: #000;
   color: white;
   position: fixed;
@@ -648,7 +647,6 @@ body {
   left: 0;
   right: 0;
   height: auto;
-  gap: 10px;
   font-size: 14px;
 }
 
@@ -656,9 +654,11 @@ body {
 .track-info {
   display: flex;
   align-items: center;
-  gap: 15px;
-  width: 250px;
-
+  gap: 12px;
+  min-width: 250px;
+  max-width: 350px;
+  flex: 1;
+  overflow: hidden;
 }
 
 .cover {
@@ -666,25 +666,92 @@ body {
   height: 56px;
   object-fit: cover;
   border-radius: 4px;
+  flex-shrink: 0;
 }
 
 .track-text {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
+  width: 100%;
+}
 
+.track-text h4,
+.track-text p {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  transition: all 0.3s ease;
 }
 
 .track-text h4 {
-  margin: 0;
   font-size: 14px;
   font-weight: 500;
+  color: white;
 }
 
 .track-text p {
-  margin: 0;
   font-size: 12px;
   color: #b3b3b3;
+}
+
+/* Track text styles */
+.track-text {
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  min-width: 0;
+}
+
+.track-text h4,
+.track-text p {
+  position: relative;
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.3s ease;
+  will-change: transform;
+  padding: 0 20px;
+  margin: 0 -20px;
+}
+
+/* No hover effects - keep text as is */
+.track-text h4:hover,
+.track-text p:hover {
+  /* No hover effects */
+}
+
+/* Marquee animation for long text */
+.track-text h4.marquee,
+.track-text p.marquee {
+  display: inline-block;
+  padding-right: 20px;
+  position: relative;
+  background: none;
+}
+
+.track-text h4.marquee:hover,
+.track-text p.marquee:hover {
+  animation: marquee 8s linear infinite;
+  animation-play-state: running;
+  text-overflow: clip;
+  overflow: visible;
+  display: inline-block;
+  transform: translateX(0);
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% + 180px));
+  }
 }
 
 /* Player Controls */
@@ -693,6 +760,10 @@ body {
   flex-direction: column;
   align-items: center;
   width: 40%;
+  min-width: 500px;
+  margin: 0 auto 0 0;
+  position: relative;
+  left: 82px;
 }
 
 .buttons {
@@ -749,16 +820,22 @@ body {
   align-items: center;
   gap: 10px;
   width: 100%;
+  min-width: 0;
 }
 
 .current-time,
 .total-time {
   font-size: 12px;
   color: #b3b3b3;
+  min-width: 45px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
 }
 
 .bar {
   flex: 1;
+  min-width: 0;
   height: 4px;
   background-color: #404040;
   border-radius: 2px;
@@ -767,19 +844,20 @@ body {
 
 .progress {
   width: 40%;
-  /* Static for now */
   height: 100%;
   background-color: #1db954;
   border-radius: 2px;
+  transition: width 0.1s linear;
 }
 
 /* Volume Control */
 .volume-controls {
   display: flex;
   align-items: center;
-  gap: 10px;
-  width: 120px;
-  right: 10px;
+  gap: 4px;
+  width: 125px;
+  min-width: 125px;
+  justify-content: flex-end;
 }
 
 .volume-icon {
@@ -1014,7 +1092,7 @@ body {
   background: none;
   width: 16px;
   height: 16px;
-  background-image: url('../images/library.svg');
+  background-image: url('./images/library.svg');
   background-size: contain;
   border: none;
   cursor: pointer;
@@ -1108,13 +1186,13 @@ body {
 
 
 .left.collapsed .hamburger-btn {
-  background-image: url('../images/lib.svg');
+  background-image: url('./images/lib.svg');
   width: 23px;
   height: 23px;
 }
 
 .left.collapsed .hamburger-btn:hover {
-  background-image: url('../images/library1.svg');
+  background-image: url('./images/library1.svg');
   width: 23px;
   height: 23px;
 }
