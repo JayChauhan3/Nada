@@ -416,7 +416,8 @@ function updateVolumeUI(volume) {
   if (!volumeInput || !volumeIcon) return;
 
   const percent = volume * 100;
-  volumeInput.style.background = `linear-gradient(to right, #1db954 ${percent}%, #535353 ${percent}%)`;
+  // volumeInput.style.background = `linear-gradient(to right, #1db954 ${percent}%, #535353 ${percent}%)`;
+  volumeInput.style.background = `linear-gradient(to right, #0241E4 ${percent}%, #535353 ${percent}%)`;
 
   if (volume === 0) {
     volumeIcon.src = './images/muted.svg';
@@ -464,7 +465,8 @@ async function main() {
     style.textContent = `
       .now-playing {
         background-color: #1a1a1a !important;
-        border-left: 3px solid #1DB954 !important;
+        // border-left: 3px solid #1DB954 !important;
+                border-left: 3px solid #0241E4 !important;
       }
       .song-item {
         transition: all 0.3s ease;

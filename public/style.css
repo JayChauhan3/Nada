@@ -589,7 +589,7 @@ body {
   position: absolute;
   bottom: 90px;
   right: 18px;
-  background-color: #1DB954;
+  background-color: #0241E4;
   border: none;
   border-radius: 50%;
   width: 48px;
@@ -626,7 +626,7 @@ body {
 
 /* Button hover effect */
 .play-button:hover {
-  background-color: #3BE476;
+  background-color: #225ef7;
   transform: scale(1.02);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
 
@@ -845,7 +845,7 @@ body {
 .progress {
   width: 40%;
   height: 100%;
-  background-color: #1db954;
+  background-color: #0241E4;
   border-radius: 2px;
   transition: width 0.1s linear;
 }
@@ -880,7 +880,7 @@ body {
   width: 90%;
   height: 4px;
   appearance: none;
-  background: linear-gradient(to right, #1db954 50%, #535353 50%);
+  background: linear-gradient(to right, #0241E4 50%, #535353 50%);
   border-radius: 2px;
   outline: none;
 }
