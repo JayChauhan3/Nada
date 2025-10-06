@@ -4,26 +4,7 @@
 
 ✨ A modern, intuitive music player for your favorite tunes
 
-
-<a href="https://nadauniverse.vercel.app/" target="_blank">
-  <div style="
-      display: inline-flex;
-      align-items: center;
-      background-color: #000;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 0;
-      font-weight: 600;
-      font-size: 15px;
-      text-decoration: none;
-      cursor: pointer;
-  ">
-      <img src="https://raw.githubusercontent.com/JayChauhan3/Spotify-Clone/main/spotify/public/images/logo1.png" 
-           alt="Nada Logo" 
-           style="width: 20px; height: 20px; margin-right: 10px; object-fit: contain;">
-      Try Live Demo
-  </div>
-</a>
+[![Try Live Demo](https://raw.githubusercontent.com/JayChauhan3/Spotify-Clone/main/spotify/public/images/button.png)](https://nadauniverse.vercel.app/)
 
 <div style="margin: 10px 0;">
 Made with  
