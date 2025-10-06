@@ -3,28 +3,32 @@
   <p>✨ A modern, intuitive music player for your favorite tunes</p>
   
   <div 
-    onclick="window.open('https://nadauniverse.vercel.app/', '_blank')" 
-    style="
-      display: inline-flex;
-      align-items: center;
-      background-color: #000000;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 4px;
-      margin: 10px 0;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      font-weight: 600;
-      font-size: 15px;
-      transition: all 0.2s ease;
-    "
-    onmouseover="this.style.opacity='0.9'"
-    onmouseout="this.style.opacity='1'"
+  onclick="window.open('https://nadauniverse.vercel.app/', '_blank')" 
+  style="
+    display: inline-flex;
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 0; /* sharp edges */
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  "
+  onmouseover="this.style.backgroundColor='#222'; this.style.transform='scale(1.05)';"
+  onmouseout="this.style.backgroundColor='#000'; this.style.transform='scale(1)';"
+>
+  <img 
+    src="https://raw.githubusercontent.com/JayChauhan3/Spotify-Clone/main/spotify/public/images/logo1.png" 
+    alt="Nada Logo" 
+    style="width: 20px; height: 20px; margin-right: 10px; object-fit: contain;"
   >
-    <img src="https://raw.githubusercontent.com/JayChauhan3/Spotify-Clone/main/spotify/public/images/logo1.png" alt="Nada Logo" style="width: 20px; height: 20px; margin-right: 10px; object-fit: contain;">
-    <span>Try Live Demo</span>
-  </div>
+  <span>Try Live Demo</span>
+</div>
   
   <div style="margin: 15px 0 10px; font-size: 14px; color: #666;">
     Made with
