@@ -70,8 +70,11 @@ Follow these steps to run Nada locally:
 git clone https://github.com/yourusername/nada.git
 cd nada
 
+---
+
 <div align="center">
 ⭐️ Give a star if you like this project!  
 Enjoy your music journey with Nada! 🎶
 </div>
 ```
+
