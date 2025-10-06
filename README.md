@@ -4,7 +4,7 @@
 
 ✨ A modern, intuitive music player for your favorite tunes
 
-[![Nada Live Demo](https://img.shields.io/badge/Live%20Demo-%20-black?style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAhBJREFUaEPtmD0OgjAMRNHGv9v8bQ0m7iZBCt7gYdcL8/XM2gFBbgnMG9LxS9cXvHgAUIC8xAh+Z7lR/cUCkyAHdOj3u6obG0r6n9jRgJYcO3G9zfsK4BTnZJg7WbW9aOACQ4POlyeIAmAl7vIKDiLXYB0g7WbFNYDxVbIoDRCtkBZVAvfK8Lo4pglcK4lkK81g/BDW9U7cXxR9F4XMe+1geYCyAKql5/Nbg8Aoq9C4Ar6h2ARMA9n5/ALAGX8OoaD7dZ5AAAAAElFTkSuQmCC)](https://nadauniverse.vercel.app/)
+[![Try Now](https://raw.githubusercontent.com/JayChauhan3/Spotify-Clone/main/spotify/public/images/nada-button.png)](https://nadauniverse.vercel.app/)
 
 <div style="margin: 10px 0;">
 Made with  
