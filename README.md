@@ -2,14 +2,15 @@
   <h1>🎵 Nada Music Player</h1>
   <p>✨ A modern, intuitive music player for your favorite tunes</p>
   
-  <a href="https://nadauniverse.vercel.app/" target="_blank" style="display: inline-flex; align-items: center; background-color: #000000; color: white; padding: 12px 24px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 16px; margin: 10px 0; border: none; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-    <span style="font-size: 1.2em; margin-right: 8px;">🎵</span>
-    <span>Try Nada Now</span>
+  <a href="https://nadauniverse.vercel.app/" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; background-color: #000000; padding: 8px; border-radius: 30px; text-decoration: none; margin: 10px 0; border: none; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); width: 44px; height: 44px;">
+    <img src="public/images/logo1.png" alt="Nada Logo" style="width: 28px; height: 28px; object-fit: contain;">
   </a>
   
-  <div style="margin-top: 10px;">
-    <img src="https://img.shields.io/github/last-commit/username/nada?style=flat-square" alt="Last commit" />
-    <img src="https://img.shields.io/github/license/username/nada?style=flat-square" alt="License" />
+  <div style="margin: 15px 0 10px; font-size: 14px; color: #666;">
+    Made with
+    <img src="https://img.icons8.com/color/24/000000/html-5--v1.png" alt="HTML5" style="width: 16px; height: 16px; margin: 0 2px; vertical-align: middle;">
+    <img src="https://img.icons8.com/color/24/000000/css3.png" alt="CSS3" style="width: 16px; height: 16px; margin: 0 2px; vertical-align: middle;">
+    <img src="https://img.icons8.com/color/24/000000/javascript--v1.png" alt="JavaScript" style="width: 16px; height: 16px; margin: 0 2px 0 2px; vertical-align: middle;">
   </div>
 </div>
 
