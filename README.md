@@ -1,8 +1,8 @@
 <div align="center">
 
-# 🎵 Nada Music Player
+# NADA UNIVERSE 
 
-✨ A modern, intuitive music player for your favorite tunes
+🧩 A modern, intuitive music player for your favorite tunes
 
 [![Nada Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Now-black?style=for-the-badge)](https://nadauniverse.vercel.app/)  
 
@@ -17,7 +17,7 @@ Made with
 
 ---
 
-## 🎧 Overview
+## 📄 Overview
 
 **Nada** is a sleek, lightweight music player built purely with **HTML, CSS, and JavaScript**.  
 It provides a clean, distraction-free interface for listening to music directly in your browser.  
@@ -31,7 +31,7 @@ Nada focuses on simplicity now, while future updates will enhance functionality 
 
 ---
 
-## ✨ Features
+## ⚡ Features
 
 - 🎼 **Intuitive Interface** – Clean, modern design focused on your music  
 - 🎧 **Smooth Playback** – Seamless audio experience with no interruptions  
@@ -41,12 +41,12 @@ Nada focuses on simplicity now, while future updates will enhance functionality 
 
 ---
 
-## 🔮 Future Features
+## 📝 Future Features
 
 Nada is evolving! Upcoming features include:  
 
 - 🎵 Full album support and browsing  
-- ❤️ Favorite tracks and playlists  
+- 🔥 Favorite tracks and playlists  
 - 📁 Upload your own songs by creating a profile  
 - 🎨 Custom themes and color schemes  
 - 🎛️ Advanced equalizer and audio settings  
