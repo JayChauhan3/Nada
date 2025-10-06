@@ -4,7 +4,7 @@
 
 ✨ A modern, intuitive music player for your favorite tunes
 
-[![Live Demo](https://raw.githubusercontent.com/JayChauhan3/Spotify-Clone/main/spotify/public/images/logo1.png)](https://nadauniverse.vercel.app/) 
+[<img src="https://raw.githubusercontent.com/JayChauhan3/Spotify-Clone/main/spotify/public/images/logo1.png" width="20" style="vertical-align:middle;margin-right:8px;"> **Try Live Demo**](https://nadauniverse.vercel.app/)
 
 <div style="margin: 10px 0;">
 Made with  
@@ -61,6 +61,13 @@ Nada is evolving! Upcoming features include:
 
 ---
 
+<div align="center">
+⭐️ Give a star if you like this project!  
+Enjoy your music journey with Nada! 🎶
+</div>
+
+---
+
 ## 🚀 Getting Started
 
 Follow these steps to run Nada locally:
@@ -70,11 +77,5 @@ Follow these steps to run Nada locally:
 git clone https://github.com/yourusername/nada.git
 cd nada
 
----
 
-<div align="center">
-⭐️ Give a star if you like this project!  
-Enjoy your music journey with Nada! 🎶
-</div>
-```
 
