@@ -24,7 +24,9 @@ Nada is a sleek, lightweight music player built with pure web technologies. Enjo
 
 Experience Nada right now! Click the button below to see it in action:
 
-[![Live Demo](https://img.shields.io/badge/🎧_Try_Nada_Now-1DB954?style=for-the-badge&logo=spotify&logoColor=white&labelColor=000000)](https://nadauniverse.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/🎧_Try_Nada_Now-1DB954?style=for-the-badge&logo=data:image/png;base64,[BASE64_ENCODED_LOGO]&logoColor=white&labelColor=000000)](https://nadauniverse.vercel.app/)
+
+<img src="public/images/logo1.png" alt="Nada Logo" width="24" height="24" style="vertical-align: middle;">
 
 ## 🛠️ Technologies Used
 
