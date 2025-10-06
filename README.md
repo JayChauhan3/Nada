@@ -61,13 +61,6 @@ Nada is evolving! Upcoming features include:
 
 ---
 
-<div align="center">
-⭐️ Give a star if you like this project!  
-Enjoy your music journey with Nada! 🎶
-</div>
-
----
-
 ## 🚀 Getting Started
 
 Follow these steps to run Nada locally:
