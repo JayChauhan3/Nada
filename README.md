@@ -4,7 +4,7 @@
 
 ✨ A modern, intuitive music player for your favorite tunes
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Now-black?style=for-the-badge&logo=spotify)](https://nadauniverse.vercel.app/)
+[![Live Demo](https://raw.githubusercontent.com/JayChauhan3/Spotify-Clone/main/spotify/public/images/logo1.png)](https://nadauniverse.vercel.app/) 
 
 <div style="margin: 10px 0;">
 Made with  
