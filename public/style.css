@@ -51,9 +51,9 @@
   }
 }
 
-/* spotify-player responsive*/
+/* nada-player responsive */
 @media (max-width: 800px) {
-  .spotify-player {
+  .nada-player {
     flex-direction: column;
     align-items: stretch;
     padding: 12px;
@@ -634,7 +634,7 @@ body {
 
 /* ////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
-.spotify-player {
+.nada-player {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
