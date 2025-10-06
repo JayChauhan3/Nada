@@ -2,10 +2,29 @@
   <h1>🎵 Nada Music Player</h1>
   <p>✨ A modern, intuitive music player for your favorite tunes</p>
   
-  <a href="https://nadauniverse.vercel.app/" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; background-color: #000000; color: white; padding: 12px 24px; border-radius: 4px; text-decoration: none; margin: 10px 0; border: none; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); font-weight: 600; font-size: 15px; transition: all 0.2s ease; min-width: 180px;">
-    <img src="public/images/logo1.png" alt="Nada Logo" style="width: 20px; height: 20px; margin-right: 10px; object-fit: contain;">
+  <div 
+    onclick="window.open('https://nadauniverse.vercel.app/', '_blank')" 
+    style="
+      display: inline-flex;
+      align-items: center;
+      background-color: #000000;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 4px;
+      margin: 10px 0;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.2s ease;
+    "
+    onmouseover="this.style.opacity='0.9'"
+    onmouseout="this.style.opacity='1'"
+  >
+    <img src="https://raw.githubusercontent.com/JayChauhan3/Spotify-Clone/main/spotify/public/images/logo1.png" alt="Nada Logo" style="width: 20px; height: 20px; margin-right: 10px; object-fit: contain;">
     <span>Try Live Demo</span>
-  </a>
+  </div>
   
   <div style="margin: 15px 0 10px; font-size: 14px; color: #666;">
     Made with
