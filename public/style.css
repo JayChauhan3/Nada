@@ -301,19 +301,31 @@ body {
   color: white;
 }
 
+.rnav ul li:last-child {
+  margin-right: -12px;
+}
+
 /* Login Button */
 .log-in {
   background-color: white;
   color: black;
   border: none;
-  border-radius: 200px;
-  padding: 17px 34px;
-  font-weight: bold;
+  border-radius: 230px;
+  padding: 10px 30px; /* Increased horizontal padding for wider button */
+  font-weight: 700;
+  font-size: 14px;    /* Slightly smaller font */
+  font-family: 'Circular', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: 0.5px;
   cursor: pointer;
+  height: 48px;       /* Fixed height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: normal;
 }
 
 .log-in:hover {
-  background-color: #f0f0f0;
+  background-color: #ffffff;
 }
 
 /* Main Container below navbar */
