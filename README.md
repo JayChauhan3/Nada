@@ -4,7 +4,9 @@
 
 ✨ A modern, intuitive music player for your favorite tunes
 
-[<img src="https://raw.githubusercontent.com/JayChauhan3/Spotify-Clone/main/spotify/public/images/logo1.png" width="20" style="vertical-align:middle;margin-right:8px;"> **Try Live Demo**](https://nadauniverse.vercel.app/)
+[![Nada Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Now-black?style=for-the-badge)](https://nadauniverse.vercel.app/)  
+
+<img src="https://raw.githubusercontent.com/JayChauhan3/Spotify-Clone/main/spotify/public/images/logo1.png" width="40" alt="Nada Logo" style="margin-top:10px;">
 
 <div style="margin: 10px 0;">
 Made with  
