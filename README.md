@@ -2,8 +2,9 @@
   <h1>🎵 Nada Music Player</h1>
   <p>✨ A modern, intuitive music player for your favorite tunes</p>
   
-  <a href="https://nadauniverse.vercel.app/" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; background-color: #000000; padding: 8px; border-radius: 30px; text-decoration: none; margin: 10px 0; border: none; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); width: 44px; height: 44px;">
-    <img src="public/images/logo1.png" alt="Nada Logo" style="width: 28px; height: 28px; object-fit: contain;">
+  <a href="https://nadauniverse.vercel.app/" target="_blank" style="display: inline-flex; align-items: center; background-color: #000000; color: white; padding: 10px 20px 10px 15px; border-radius: 30px; text-decoration: none; margin: 10px 0; border: none; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); font-weight: 600; font-size: 15px; transition: all 0.2s ease;">
+    <img src="public/images/logo1.png" alt="Nada Logo" style="width: 20px; height: 20px; margin-right: 10px; object-fit: contain;">
+    Try Live Demo
   </a>
   
   <div style="margin: 15px 0 10px; font-size: 14px; color: #666;">
