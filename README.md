@@ -2,10 +2,15 @@
   <h1>🎵 Nada Music Player</h1>
   <p>✨ A modern, intuitive music player for your favorite tunes</p>
   
-  [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://nadauniverse.vercel.app/)
+  <a href="https://nadauniverse.vercel.app/" target="_blank" style="display: inline-flex; align-items: center; background-color: #000000; color: white; padding: 12px 24px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 16px; margin: 10px 0; border: none; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+    <span style="font-size: 1.2em; margin-right: 8px;">🎵</span>
+    <span>Try Nada Now</span>
+  </a>
   
-  <img src="https://img.shields.io/github/last-commit/username/nada?style=flat-square" alt="Last commit" />
-  <img src="https://img.shields.io/github/license/username/nada?style=flat-square" alt="License" />
+  <div style="margin-top: 10px;">
+    <img src="https://img.shields.io/github/last-commit/username/nada?style=flat-square" alt="Last commit" />
+    <img src="https://img.shields.io/github/license/username/nada?style=flat-square" alt="License" />
+  </div>
 </div>
 
 ## 🎧 Overview
@@ -19,14 +24,6 @@ Nada is a sleek, lightweight music player built with pure web technologies. Enjo
 - 📱 **Responsive Design** - Works beautifully on all devices
 - ⚡ **Lightning Fast** - Built for speed and performance
 - 🎨 **Customizable** - Personalize your listening experience
-
-## 🚀 Live Demo
-
-Experience Nada right now! Click the button below to see it in action:
-
-[![Live Demo](https://img.shields.io/badge/🎧_Try_Nada_Now-1DB954?style=for-the-badge&logo=data:image/png;base64,[BASE64_ENCODED_LOGO]&logoColor=white&labelColor=000000)](https://nadauniverse.vercel.app/)
-
-<img src="public/images/logo1.png" alt="Nada Logo" width="24" height="24" style="vertical-align: middle;">
 
 ## 🛠️ Technologies Used
 
