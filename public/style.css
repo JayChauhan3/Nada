@@ -51,61 +51,658 @@
   }
 }
 
-/* nada-player responsive */
-@media (max-width: 800px) {
+/* Mobile & Tablet Player (up to 1279px) */
+@media (max-width: 1279px) {
   .nada-player {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 12px;
-    gap: 16px;
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    height: 72px;
+    background: #000;
+    border-top: none; /* Removed top border completely */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
   }
 
+  /* Hide all controls in mini player except what we want */
+  .nada-player:not(.fullscreen) .player-controls,
+  .nada-player:not(.fullscreen) .volume-controls,
+  .nada-player:not(.fullscreen) .progress-container,
+  .nada-player:not(.fullscreen) .maximize-btn {
+    display: none !important;
+  }
+
+  /* Track info - left side */
   .track-info {
-    width: 180px !important;
-    flex-direction: row;
+    display: flex;
     align-items: center;
-    gap: 5px !important;
-    font-size: 5px !important;
-    word-break: break-all !important;
+    flex: 1;
+    min-width: 0;
+    gap: 12px;
+    overflow: hidden;
   }
 
   .cover {
-    width: 40px !important;
-    height: 40px !important;
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .track-text {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
   }
 
   .track-text h4 {
-    font-size: 13px !important;
+    font-size: 14px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    color: white;
   }
 
   .track-text p {
-    font-size: 11px !important;
+    font-size: 12px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 2px 0 0;
+    color: #b3b3b3;
   }
 
-  .player-controls {
-    /* width: 100% ; */
-    align-items: center !important;
-  }
-
-  .buttons {
-    gap: 16px !important;
-  }
-
-  .progress-bar {
-    gap: 6px;
-    font-size: 12px;
-    width: 100%;
-  }
-
-  .volume-controls {
-    width: 100%;
+  /* Play/Pause button - right side */
+  .mobile-play-pause {
+    display: flex !important;
+    align-items: center;
     justify-content: center;
-    gap: 8px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    color: white;
+    padding: 0;
+    margin-left: 8px;
   }
 
-  .volume-icon {
-    width: 16px;
-    height: 16px;
+  /* Mobile Fullscreen Player (screens < 1280px) */
+  @media (max-width: 1279px) {
+    .nada-player.fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(18, 18, 18, 0.98);
+      z-index: 1000;
+      padding: 20px 0 30px;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    
+    .nada-player.fullscreen .track-info {
+      text-align: center;
+      margin: 0 0 30px 0;
+      width: 100%;
+      max-width: 300px;
+    }
+    
+    .nada-player.fullscreen .cover {
+      width: 70vw;
+      height: 70vw;
+      max-width: 250px;
+      max-height: 250px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      margin: 0 auto 20px;
+      object-fit: cover;
+    }
+    
+    .nada-player.fullscreen .track-text h4 {
+      font-size: 18px;
+      margin: 0 0 4px 0;
+      color: #fff;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .nada-player.fullscreen .track-text p {
+      font-size: 14px;
+      color: #b3b3b3;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  /* Desktop Overlay (screens >= 1280px) */
+  @media (min-width: 1280px) {
+    .nada-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 80px; /* Height of the player */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(18, 18, 18, 0.95);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      z-index: 999;
+      overflow: hidden;
+    }
+  }
+  
+  /* Hide mobile play button in fullscreen */
+  .nada-player.fullscreen .mobile-play-pause,
+  .nada-player.fullscreen .volume-controls {
+    display: none !important;
+  }
+  
+  .nada-player.fullscreen .track-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 0 0 30px 0;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .nada-player.fullscreen .cover {
+    width: 80%;
+    max-width: 300px;
+    aspect-ratio: 1/1;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    margin: 0 auto 20px;
+    object-fit: cover;
+  }
+  
+  .nada-player.fullscreen .track-text h4 {
+    font-size: 18px;
+    margin: 0 0 4px;
+    color: #fff;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    padding: 0 10px;
+  }
+  
+  .nada-player.fullscreen .track-text p {
+    font-size: 14px;
+    color: #b3b3b3;
+    margin: 0 0 30px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .nada-player.fullscreen .progress-bar {
+    width: 100%;
+    max-width: 90%;
+    margin: 20px auto 10px;
+    box-sizing: border-box;
+    padding: 0;
+  }
+  
+  .nada-player.fullscreen .time-display {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 5px auto 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .nada-player.fullscreen .current-time,
+  .nada-player.fullscreen .total-time {
+    font-size: 11px;
+    color: #b3b3b3;
+  }
+
+  .nada-player.fullscreen .time:first-child {
+    text-align: left;
+  }
+  
+  .nada-player.fullscreen .time:last-child {
+    text-align: right;
+  }
+
+  /* Player Controls Container - Mobile Fullscreen */
+  .nada-player.fullscreen .player-controls {
+    width: 100%;
+    max-width: 300px;
+    padding: 0;
+    margin: 20px auto 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .nada-player.fullscreen .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .nada-player.fullscreen .buttons img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+  
+  .nada-player.fullscreen .buttons #play {
+    width: 48px;
+    height: 48px;
+    background: #1db954;
+    border-radius: 50%;
+    padding: 8px;
+  }
+  
+  /* Base button styles */
+  .nada-player.fullscreen .control-btn {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: white;
+    opacity: 0.9;
+    transition: all 0.2s ease;
+  }
+  
+  /* Play/Pause button - larger than others */
+  .nada-player.fullscreen .play-pause-btn {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    background: #1db954;
+    border-radius: 50%;
+    margin: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Button icons */
+  .nada-player.fullscreen .control-btn svg {
+    width: 22px;
+    height: 22px;
+  }
+  
+  /* Play/Pause icon - larger than others */
+  .nada-player.fullscreen .play-pause-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* Button active state */
+  .nada-player.fullscreen .control-btn:active {
+    opacity: 0.7;
+    transform: scale(0.95);
+  }
+  
+  /* Adjust for small screens */
+  @media (max-width: 400px) {
+    .nada-player.fullscreen .buttons {
+      gap: 12px;
+    }
+    
+    .nada-player.fullscreen .buttons img {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .nada-player.fullscreen .buttons #play {
+      width: 44px;
+      height: 44px;
+    }
+    
+    .nada-player.fullscreen .progress-bar {
+      padding: 0 16px;
+      margin: 15px 0 8px;
+    }
+  }
+  
+  /* Adjust for very small screens */
+  @media (max-width: 340px) {
+    .nada-player.fullscreen .player-controls {
+      padding: 0 8px;
+      gap: 2px;
+    }
+    
+    .nada-player.fullscreen .player-controls-main {
+      gap: 6px;
+    }
+    
+    .nada-player.fullscreen .control-btn {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+    }
+    
+    .nada-player.fullscreen .play-pause-btn {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      margin: 0 2px;
+    }
+    
+    .nada-player.fullscreen .control-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+    
+    .nada-player.fullscreen .play-pause-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+    height: 44px;
+  }
+}
+
+/* Desktop Overlay Styles */
+@media (min-width: 1280px) {
+  .nada-overlay .player-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin: 25px 0;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .nada-overlay .progress-container {
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto 20px;
+    padding: 0;
+  }
+
+  .nada-overlay .progress-bar {
+    width: 100%;
+    height: 4px;
+    background: #4a4a4a;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .nada-overlay .progress-filled {
+    height: 100%;
+    background: #1db954;
+    border-radius: 2px;
+    transition: width 0.1s linear;
+  }
+
+  .nada-overlay .time {
+    font-size: 12px;
+    color: #b3b3b3;
+    min-width: 40px;
+    text-align: center;
+  }
+}
+  
+  .nada-player.fullscreen .mobile-play-pause {
+    display: none;
+  }
+
+  /* Full Screen Player */
+  .nada-player.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 16px;
+    background: #121212;
+    z-index: 2000;
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                opacity 0.3s ease;
+  }
+  
+  /* Initial state for fullscreen animation */
+  .nada-player:not(.fullscreen) {
+    transform: translateY(0);
+  }
+  
+  /* When opening fullscreen */
+  .nada-player.fullscreen-enter {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  
+  /* When closing fullscreen */
+  .nada-player.fullscreen-exit {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  .nada-player.fullscreen .track-info {
+    flex-direction: column;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 100% !important;
+  }
+
+  .nada-player.fullscreen .cover {
+    width: 80% !important;
+    height: auto !important;
+    max-width: 300px;
+    max-height: 300px;
+    border-radius: 8px;
+    margin: 0 auto 24px;
+    aspect-ratio: 1/1;
+  }
+
+  .nada-player.fullscreen .track-text {
+    width: 100%;
+  }
+
+  .nada-player.fullscreen .track-text h4 {
+    font-size: 24px !important;
+    margin-bottom: 8px;
+  }
+
+  .nada-player.fullscreen .track-text p {
+    font-size: 16px !important;
+    color: #b3b3b3;
+  }
+
+  .nada-player.fullscreen .player-controls {
+    display: flex;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 16px;
+  }
+
+  .nada-player.fullscreen .progress-bar {
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .nada-player.fullscreen .volume-controls {
+    display: flex;
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto 0;
+    justify-content: center;
+  }
+
+  /* Close button for fullscreen */
+  .close-fullscreen {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  .close-fullscreen img {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Play/Pause button for mobile/tablet */
+  .mobile-play-pause {
+    background: none;
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    display: none; /* Hidden by default, shown only on mobile */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 8px;
+    padding: 0;
+    opacity: 0.9;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .mobile-play-pause:active {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+}
+
+/* Tablet Styles (now handled by mobile styles) */
+/* This media query is now redundant as we're using a single breakpoint at 1280px */
+@media (min-width: 1280px) {
+  .nada-player {
+    padding: 0 20px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    background-color: #000;
+    border-top: 1px solid #282828;
+  }
+  
+  /* Hide progress bar in mini player */
+  .nada-player:not(.fullscreen) .progress-container {
+    display: none !important;
+  }
+  
+  /* Hide mobile play/pause button on tablets when in desktop mode */
+  .mobile-play-pause {
+    display: none !important;
+  }
+  
+  .track-info {
+    width: 30%;
+    min-width: 200px;
+  }
+  
+  .player-controls {
+    width: 40%;
+    margin: 0 auto;
+  }
+  
+  .volume-controls {
+    width: 30%;
+    justify-content: flex-end;
+  }
+  
+  /* For smaller tablets, show mobile-like behavior */
+  @media (max-width: 800px) {
+    /* Hide progress bar in mini player */
+    .nada-player:not(.fullscreen) .progress-container,
+    .nada-player:not(.fullscreen) .player-controls,
+    .nada-player:not(.fullscreen) .volume-controls {
+      display: none !important;
+    }
+    
+    .nada-player {
+      padding: 8px 16px;
+      height: 72px;
+    }
+    
+    /* Show mobile play/pause button on mobile/tablet */
+    .mobile-play-pause {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: none;
+      color: white;
+      padding: 0;
+      margin-left: 8px;
+      flex-shrink: 0;
+    }
+    
+    .player-controls,
+    .volume-controls,
+    .maximize-btn {
+      display: none !important;
+    }
+    
+    .track-info {
+      width: auto;
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .track-text h4 {
+      font-size: 14px !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .track-text p {
+      font-size: 12px !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
 
@@ -646,10 +1243,17 @@ body {
 
 /* ////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
+/* Player base styles */
 .nada-player {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000; /* Keep player above overlay */
+  background: #181818;
   align-items: center;
   padding: 8px 16px;
   background-color: #000;
@@ -660,6 +1264,173 @@ body {
   right: 0;
   height: auto;
   font-size: 14px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 0.3s ease, 
+              background-color 0.3s ease;
+  z-index: 1000;
+  transform: translateY(0);
+  will-change: transform, opacity;
+}
+
+/* Desktop maximize button - only show on desktop */
+.maximize-btn {
+  display: none; /* Hidden by default */
+}
+
+/* Desktop styles */
+@media (min-width: 1280px) {
+  /* Original desktop layout */
+  .nada-player {
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    height: 76px; /* Increased from 70px */
+    background-color: #000;
+    border-top: none; /* Removed top border completely */
+  }
+  
+  .track-info {
+    display: flex;
+    align-items: center;
+    width: 30%;
+    min-width: 300px;
+    max-width: 400px;
+    flex-shrink: 0;
+  }
+  
+  .track-text {
+    margin-left: 12px;
+    min-width: 0;
+    flex: 1;
+  }
+  
+  .player-controls {
+    width: 40%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  
+  .volume-controls {
+    width: 30%;
+    min-width: 180px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  
+  /* Show maximize button on desktop */
+  .maximize-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin-left: 16px;
+    background: none;
+    border: none;
+    color: #b3b3b3;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+  }
+  
+  .maximize-btn:hover {
+    opacity: 1;
+  }
+  
+  .nada-player.expanded .maximize-btn svg {
+    transform: rotate(180deg);
+  }
+  
+  .maximize-btn:active {
+    transform: scale(0.9);
+  }
+  
+  .maximize-btn:hover {
+    opacity: 1;
+    color: white;
+  }
+  
+  .maximize-btn img {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+  .nada-player.expanded {
+    /* Keep player at bottom */
+    height: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    background-color: #121212;
+    z-index: 1999; /* Just below the player controls */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .nada-player.expanded .track-info {
+    flex-direction: column;
+    text-align: center;
+    margin: 40px 0;
+    max-width: 800px;
+    width: 100%;
+  }
+
+  .nada-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 80px; /* Stop at player height */
+  background: #121212;
+  z-index: 1999; /* Below player */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.nada-overlay img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+  }
+
+  .nada-player.expanded .track-text h4 {
+    font-size: 28px !important;
+    margin-bottom: 8px;
+  }
+
+  .nada-player.expanded .track-text p {
+    font-size: 20px !important;
+    color: #b3b3b3;
+  }
+
+  .nada-player.expanded .player-controls {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .nada-player.expanded .progress-bar {
+    width: 100%;
+    margin: 30px 0;
+  }
+
+  .nada-player.expanded .volume-controls {
+    margin-top: 30px;
+  }
 }
 
 /* Track Info */
@@ -671,6 +1442,8 @@ body {
   max-width: 350px;
   flex: 1;
   overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .cover {
@@ -732,11 +1505,7 @@ body {
   margin: 0 -20px;
 }
 
-/* No hover effects - keep text as is */
-.track-text h4:hover,
-.track-text p:hover {
-  /* No hover effects */
-}
+/* Track text hover states are intentionally left without effects */
 
 /* Marquee animation for long text */
 .track-text h4.marquee,
@@ -776,6 +1545,7 @@ body {
   margin: 0 auto 0 0;
   position: relative;
   left: 82px;
+  transition: all 0.3s ease;
 }
 
 .buttons {
@@ -861,15 +1631,21 @@ body {
   border-radius: 2px;
   transition: width 0.1s linear;
 }
-
 /* Volume Control */
 .volume-controls {
   display: flex;
   align-items: center;
-  gap: 4px;
-  width: 125px;
-  min-width: 125px;
+  gap: 8px;
+  width: 200px;
   justify-content: flex-end;
+  margin-left: auto;
+}
+
+/* Hide volume controls on mobile by default */
+@media (max-width: 1024px) {
+  .volume-controls {
+    display: none;
+  }
 }
 
 .volume-icon {
@@ -1234,4 +2010,236 @@ body {
   object-fit: cover;
   padding-left: 5px;
   padding-right: 5px;
+}
+
+/* Mobile Player Overlay */
+.mobile-player-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #121212;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-player-overlay.active {
+  transform: translateY(0);
+}
+
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  box-sizing: border-box;
+  margin: auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  height: auto;
+  min-height: 0;
+  position: relative;
+  top: -5%; /* Slight upward adjustment for better visual centering */
+}
+
+.overlay-cover-container {
+  width: 85%;
+  max-width: 280px;
+  margin: 0 auto 30px;
+  aspect-ratio: 1/1;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.overlay-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.overlay-track-info {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 0 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.overlay-track-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: block;
+}
+
+.overlay-track-artist {
+  font-size: 16px;
+  color: #b3b3b3;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: block;
+}
+
+.overlay-progress-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 25px;
+  padding: 0 10px;
+}
+
+.overlay-progress-bar {
+  width: 100%;
+  height: 4px;
+  background-color: #4d4d4d;
+  border-radius: 2px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.overlay-progress {
+  height: 100%;
+  background-color: #0241E4;
+  width: 0%;
+  position: relative;
+  transition: width 0.1s linear;
+}
+
+.overlay-time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #b3b3b3;
+  margin-top: 5px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.overlay-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin: 10px 0 30px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.overlay-control-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s, opacity 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.overlay-control-btn:active {
+  opacity: 0.7;
+  transform: scale(0.95);
+}
+
+#overlay-play {
+  width: 64px;
+  height: 64px;
+  background-color: #0241E4;
+  border-radius: 50%;
+  box-shadow: 0 4px 16px rgba(2, 65, 228, 0.4);
+}
+
+#overlay-play:active {
+  transform: scale(0.95);
+}
+
+.overlay-control-btn img {
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+}
+
+#overlay-play img {
+  width: 28px;
+  height: 28px;
+  margin-left: 2px; /* Slight adjustment for play icon centering */
+}
+
+/* Animation for overlay */
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
+}
+
+/* Hide scrollbar for overlay content but keep it scrollable */
+.overlay-content::-webkit-scrollbar {
+  display: none;
+}
+
+.overlay-content {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Better touch feedback */
+.overlay-progress-bar:active .overlay-progress::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background-color: #0241E4;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Safe area for notches and home indicators */
+@supports (padding: max(0px)) {
+  .overlay-content {
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+  }
 }

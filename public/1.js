@@ -24,6 +24,7 @@ buttons.forEach(btn => {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //has to be top, before Function Called
 let currentSong = new Audio();
+window.currentSong = currentSong;
 const play = document.getElementById('play');
 let isSongLoaded = false;
 let currFolder;
@@ -149,6 +150,7 @@ const playMusic = (track, pause = false, fromList = false, resumeTime = 0, autoP
     }
     
     currentSong.src = songUrl;
+    window.currentSong = currentSong; 
     isSongLoaded = false;
     currentSongIndex = songs.findIndex(s => s === track);
 
