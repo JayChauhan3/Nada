@@ -1,4 +1,3 @@
-<!-- Testing GitHub commit -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -155,7 +154,44 @@
 
   </div>
 
+  <!-- Mobile Player Overlay -->
+  <div class="mobile-player-overlay">
+    <div class="overlay-content">
+      <div class="overlay-cover-container">
+        <img src="" alt="Album Art" class="overlay-cover">
+      </div>
+      
+      <div class="overlay-track-info">
+        <h3 class="overlay-track-title">Track Title</h3>
+        <div class="overlay-track-artist">Artist Name</div>
+      </div>
+      
+      <div class="overlay-progress-container">
+        <div class="overlay-progress-bar">
+          <div class="overlay-progress"></div>
+        </div>
+        <div class="overlay-time-display">
+          <span class="overlay-current-time">0:00</span>
+          <span class="overlay-total-time">0:00</span>
+        </div>
+      </div>
+      
+      <div class="overlay-controls">
+        <button class="overlay-control-btn" id="overlay-previous">
+          <img src="./images/previous.svg" alt="Previous">
+        </button>
+        <button class="overlay-control-btn" id="overlay-play">
+          <img src="./images/pcontrol.svg" alt="Play/Pause">
+        </button>
+        <button class="overlay-control-btn" id="overlay-next">
+          <img src="./images/next.svg" alt="Next">
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script src="1.js"></script>
+  <script src="player.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
 </body>
 
