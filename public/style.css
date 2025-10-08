@@ -2041,26 +2041,23 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex: 1;
   width: 100%;
   max-width: 500px;
   padding: 20px;
   box-sizing: border-box;
   margin: auto;
+  height: 100%;
+  position: relative;
+  padding-top: env(safe-area-inset-top, 0);
+  padding-bottom: env(safe-area-inset-bottom, 0);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding-top: env(safe-area-inset-top, 0px);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-  height: auto;
-  min-height: 0;
-  position: relative;
-  top: -5%; /* Slight upward adjustment for better visual centering */
 }
 
 .overlay-cover-container {
-  width: 85%;
+  width: 70vmin;
   max-width: 280px;
-  margin: 0 auto 30px;
+  margin: 0 auto;
   aspect-ratio: 1/1;
   border-radius: 8px;
   overflow: hidden;
@@ -2078,9 +2075,10 @@ body {
 }
 
 .overlay-track-info {
-  width: 100%;
+  width: 70vmin;
+  max-width: 500px;
   text-align: center;
-  margin-bottom: 30px;
+  margin: 20px auto 15px;
   padding: 0 10px;
   position: relative;
   z-index: 1;
@@ -2110,18 +2108,17 @@ body {
 }
 
 .overlay-progress-container {
-  width: 100%;
+  width: 70vmin;
   max-width: 500px;
-  margin: 0 auto 25px;
-  padding: 0;
+  margin: 25px auto 0px;
+  padding: 0 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .overlay-progress-bar {
-  width: 70vmin;
-  max-width: 500px;
+  width: 100%;
   height: 3px;
   background-color: rgba(77, 77, 77, 0.6);
   border-radius: 2px;
@@ -2148,26 +2145,16 @@ body {
 
 /* Time display */
 .overlay-time-display {
-  width: 70vmin;
+  width: 100%;
   max-width: 500px;
   display: flex;
   justify-content: space-between;
   font-size: 12px;
   color: #b3b3b3;
-  margin-top: 8px;
-  font-weight: 400;
+  margin: 5px 0 0;
+  font-weight: 500;
   letter-spacing: 0.3px;
   padding: 0 2px;
-}
-
-.overlay-time-display {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  color: #b3b3b3;
-  margin-top: 5px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
 }
 
 .overlay-controls {
@@ -2175,7 +2162,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 24px;
-  margin: 10px 0 30px;
+  margin: 15px 0 0px;
   width: 100%;
   max-width: 300px;
 }
