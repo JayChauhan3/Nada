@@ -507,85 +507,142 @@ document.addEventListener('DOMContentLoaded', function() {
     return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
   }
   
-  // Toggle overlay with poster
-  function toggleExpanded() {
-    // Don't show desktop overlay on mobile
-    if (window.innerWidth < 1280) return;
-    
-    let overlay = document.querySelector('.nada-overlay');
-    
-    if (!overlay) {
-      // Create overlay
-      overlay = document.createElement('div');
-      overlay.className = 'nada-overlay';
-      
-      // Get player position
-      const playerRect = player.getBoundingClientRect();
-      
-      // Style overlay to cover everything except player with blur effect
-      Object.assign(overlay.style, {
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        right: '0',
-        bottom: `${window.innerHeight - playerRect.top}px`,
-        backgroundColor: 'rgba(0, 0, 0, 0.7)', // Semi-transparent dark overlay
-        backdropFilter: 'blur(10px)', // Blur effect
-        WebkitBackdropFilter: 'blur(10px)', // For Safari
-        zIndex: '9999', // Ensure it's above everything including navbar
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        overflow: 'hidden'
+
+// Toggle overlay with poster (Desktop only)
+function toggleExpanded() {
+  // Don't show desktop overlay on mobile
+  if (window.innerWidth < 1280) return;
+
+  let overlay = document.querySelector('.nada-overlay');
+
+  if (!overlay) {
+    // === CREATE OVERLAY ===
+    overlay = document.createElement('div');
+    overlay.className = 'nada-overlay';
+
+    // Get player position
+    const playerRect = player.getBoundingClientRect();
+
+    // Style overlay
+    Object.assign(overlay.style, {
+      position: 'fixed',
+      top: '0',
+      left: '0',
+      right: '0',
+      bottom: `${window.innerHeight - playerRect.top}px`,
+      backgroundColor: 'rgba(0, 0, 0, 0.7)',
+      backdropFilter: 'blur(10px)',
+      WebkitBackdropFilter: 'blur(10px)',
+      zIndex: '9999',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      overflow: 'hidden'
+    });
+
+    // === COVER SETUP ===
+    const mainCover = player.querySelector('.cover');
+    if (mainCover) {
+      const coverContainer = document.createElement('div');
+      Object.assign(coverContainer.style, {
+        position: 'relative',
+        width: '70vmin',
+        height: '70vmin',
+        maxWidth: '500px',
+        maxHeight: '500px',
+        margin: '0 auto',
+        boxShadow: '0 12px 24px rgba(0, 0, 0, 0.3), 0 6px 12px rgba(0, 0, 0, 0.25)',
+        borderRadius: '8px'
       });
-      
-      // Add cover to overlay
-      const cover = player.querySelector('.cover');
-      if (cover) {
-        const coverContainer = document.createElement('div');
-        coverContainer.style.position = 'relative';
-        coverContainer.style.width = '70vmin';  // Reduced from 80vmin
-        coverContainer.style.height = '70vmin'; // Reduced from 80vmin
-        coverContainer.style.maxWidth = '500px'; // Reduced from 600px
-        coverContainer.style.maxHeight = '500px'; // Reduced from 600px
-        coverContainer.style.margin = '0 auto';
-        coverContainer.style.boxShadow = '0 12px 24px rgba(0, 0, 0, 0.3), 0 6px 12px rgba(0, 0, 0, 0.25)';
-        coverContainer.style.borderRadius = '8px';
-        
-        const coverClone = cover.cloneNode(true);
-        Object.assign(coverClone.style, {
-          width: '100%',
-          height: '100%',
-          objectFit: 'contain',
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          maxWidth: '100%',
-          maxHeight: '100%',
-          borderRadius: '18px' // Slightly smaller radius than container
-        });
-        
-        coverContainer.appendChild(coverClone);
-        overlay.appendChild(coverContainer);
-      }
-      
+
+      const coverClone = mainCover.cloneNode(true);
+      Object.assign(coverClone.style, {
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover', // Changed from 'contain' to 'cover' for better fill
+        backgroundColor: '#000', // black background behind poster
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        maxWidth: '100%',
+        maxHeight: '100%',
+        borderRadius: '18px',
+        transition: 'opacity 0.3s ease-in-out',
+        userSelect: 'none',
+        pointerEvents: 'none'
+      });
+
+      coverContainer.appendChild(coverClone);
+      overlay.appendChild(coverContainer);
       document.body.appendChild(overlay);
-      
-      // Change icon to minimize (four arrows pointing inward)
-      const icon = maximizeBtn.querySelector('path');
-      if (icon) {
-        icon.setAttribute('d', 'M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z');
-      }
-    } else {
-      // Remove overlay and reset icon to maximize (single square)
-      overlay.remove();
-      const icon = maximizeBtn.querySelector('path');
-      if (icon) {
-        icon.setAttribute('d', 'M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z');
-      }
+
+      // === AUTO UPDATE POSTER ===
+      let lastSrc = '';
+      const updateOverlayPoster = () => {
+        const currentSrc = mainCover.src;
+        if (!currentSrc) return;
+
+        // If same src but visually changed (blob reuse), still refresh periodically
+        if (currentSrc === lastSrc && !currentSrc.startsWith('blob:')) return;
+        lastSrc = currentSrc;
+
+        const tempImg = new Image();
+        tempImg.onload = () => {
+          // Add timestamp to prevent caching
+          const finalSrc = currentSrc.startsWith('data:') || currentSrc.startsWith('blob:')
+            ? currentSrc
+            : currentSrc + (currentSrc.includes('?') ? '&' : '?') + 't=' + Date.now();
+
+          coverClone.style.opacity = '0';
+          setTimeout(() => {
+            coverClone.src = finalSrc;
+            coverClone.style.opacity = '1';
+          }, 100);
+        };
+        tempImg.src = currentSrc;
+      };
+
+      // MutationObserver for src change
+      const coverObserver = new MutationObserver(updateOverlayPoster);
+      coverObserver.observe(mainCover, { attributes: true, attributeFilter: ['src'] });
+
+      // Polling fallback (for blob reuse)
+      const pollInterval = setInterval(updateOverlayPoster, 1000);
+
+      overlay._coverObserver = coverObserver;
+      overlay._pollInterval = pollInterval;
+
+      // Initial load
+      updateOverlayPoster();
+    }
+
+    // === Append overlay and change icon ===
+    const icon = maximizeBtn.querySelector('path');
+    if (icon) {
+      icon.setAttribute('d', 'M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z');
+    }
+
+  } else {
+    // === CLEANUP & CLOSE ===
+    if (overlay._coverObserver) {
+      overlay._coverObserver.disconnect();
+      delete overlay._coverObserver;
+    }
+    if (overlay._pollInterval) {
+      clearInterval(overlay._pollInterval);
+      delete overlay._pollInterval;
+    }
+
+    overlay.remove();
+
+    // Reset maximize icon
+    const icon = maximizeBtn.querySelector('path');
+    if (icon) {
+      icon.setAttribute('d', 'M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z');
     }
   }
+}
   
   // Update play/pause button icon based on audio state
   function updatePlayPauseIcon() {
