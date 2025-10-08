@@ -2078,7 +2078,7 @@ body {
   width: 70vmin;
   max-width: 500px;
   text-align: center;
-  margin: 20px auto 15px;
+  margin: 20px auto 20px;
 
   position: relative;
   z-index: 1;
@@ -2110,7 +2110,7 @@ body {
 .overlay-progress-container {
   width: 70vmin;
   max-width: 500px;
-  margin: 25px auto 0px;
+  margin: 0px auto 0px;
   padding: 0 0px;
   display: flex;
   flex-direction: column;
