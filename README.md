@@ -41,7 +41,7 @@ Nada focuses on simplicity now, while future updates will enhance functionality 
 
 ---
 
-## 📝 Future Features
+## 📝 Future Features (coming soon)
 
 Nada is evolving! Upcoming features include:  
 
